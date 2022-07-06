@@ -23,19 +23,19 @@ def send_message():
 
     # convert .json file to needed format
     msg = request.json
-    print(msg)
+    print("Отправлено сообщение:", msg)
     """
     example of msg: { "UserName":"RusAl","MessageText":"Privet na sto let!!!",
     "TimeStamp":"2021-03-05T18:23:10.932973Z"}.
     So we've got just a dictionary with the main information
     """
     list_of_messages.append(msg)
-    msgtext = f"{msg['UserName']} <{msg['TimeStamp']}>: {msg['MessageText']}"
+    msgtext = f"{msg['username']} <{msg['timestamp']}>: {msg['message_text']}"
     print(f"Всего сообщений: {len(list_of_messages)} Посланное сообщение: {msgtext}")
 
     return f"Сообщение отослано успешно. Всего сообщений: {len(list_of_messages)} ", 200
 
-@app.route("/api/Messanger/<int:id>")
+@app.route("/api/Messanger/<int:id>", methods=['GET'])
 def get_message(id):
     print(id)
     if id >= 0 and id < len(list_of_messages):
